@@ -329,7 +329,7 @@ public struct FullscreenPopup<Item: Equatable, PopupContent: View>: ViewModifier
             // Weak reference to avoid the work item capturing the struct,
             // which would create a retain cycle with the work holder itself.
 
-            autohidingWorkHolder.work = DispatchWorkItem(block: { [weak isPresentedRef, weak itemRef] in
+            autohidingWorkHolder.work = DispatchWorkItem(block: { [weak itemRef] in
                 if isDragging {
                     timeToHide = true // raise this flag to hide the popup once the drag is over
                     return
