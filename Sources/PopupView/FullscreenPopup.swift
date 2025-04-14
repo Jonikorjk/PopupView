@@ -82,7 +82,7 @@ public struct FullscreenPopup<Item: Equatable, PopupContent: View>: ViewModifier
     // MARK: - Autohide
 
     /// Class reference for capturing a weak reference later in dispatch work holder.
-    private var isPresentedRef: ClassReference<Binding<Bool>>?
+    private var isPresentedRef: Binding<Bool>?
     private var itemRef: ClassReference<Binding<Item?>>?
 
     /// holder for autohiding dispatch work (to be able to cancel it when needed)
@@ -141,7 +141,7 @@ public struct FullscreenPopup<Item: Equatable, PopupContent: View>: ViewModifier
             self.itemView = itemView
         }
 
-        self.isPresentedRef = ClassReference(self.$isPresented)
+        //self.isPresentedRef = self.isPresented
         self.itemRef = ClassReference(self.$item)
         self.dismissEnabledRef = ClassReference(self.dismissEnabled)
     }
@@ -335,7 +335,7 @@ public struct FullscreenPopup<Item: Equatable, PopupContent: View>: ViewModifier
                     return
                 }
                 dismissSource = .autohide
-                isPresentedRef?.value.wrappedValue = false
+                // isPresentedRef?.value.wrappedValue = false
                 itemRef?.value.wrappedValue = nil
                 autohidingWorkHolder.work = nil
             })
